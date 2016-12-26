@@ -1,16 +1,14 @@
 <ul>
 {% assign nav_pages = site.html_pages | sort: 'navid' %}
-{% assign navid = 0 %}
-{% assign title = "" %}
 {% for p in nav_pages %}
-  {% if p.navid and (p.navid != navid or p.title != title) %}
-    {% assign navid = p.navid %}
-    {% assign title = p.title %}
-    <li>
-      <a href="{{ p.url }}" {% if p.url == page.url %}class="active"{% endif %}>
-        {{ p.title }}
-      </a>
-    </li>
+  {% if p.navid %}
+    {% unless p.url contains '/posts/' %}
+      <li>
+        <a href="{{ p.url }}" {% if p.url == page.url %}class="active"{% endif %}>
+          {{ p.title }}
+        </a>
+      </li>
+      {% endunless %}
   {% endif %}
 {% endfor %}
 </ul>
