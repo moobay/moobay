@@ -43,7 +43,7 @@ macOS设置网络代理<br/>
 ![](/assets/mitmproxy/net-01.png)
 
 iOS设置网络代理<br/> 
-![](/assets/mitmproxy/net-02.PNG)
+![](/assets/mitmproxy/net-02.png)
 
 这样配置了代理服务器IP端口的电脑以及各种移动设备，就可以被`mitmproxy`轻易抓到网络通信包。这种方式使用起来相对还是有点门槛，使用前必须设置网络代理，如果条件不允许该怎么办？
 
@@ -57,7 +57,7 @@ iOS设置网络代理<br/>
 
 #### - 打开"个人热点"开关
 
-![](/assets/mitmproxy/net-03.PNG)
+![](/assets/mitmproxy/net-03.png)
 
 #### - 关闭笔记本WiFi，然后通过USB线把手机连接到笔记本
 
