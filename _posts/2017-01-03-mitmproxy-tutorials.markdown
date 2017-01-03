@@ -14,7 +14,7 @@ mitmproxy -p 8888 --follow
 通过一行简单的命令搭建好了一台代理服务器，其中`-p 8888`制定了代理主机服务端口，`--follow`是可选参数，可以代理服务器日志实时刷新，运行时界面是这样的
 
 ![](/assets/mitmproxy/01.png)
-
+<!--more-->
 在运行界面点击任意一条日志，可以查看经过相关`http`协议的包头以及包体，就好似抓包工具一般，见下图
 
 `http`包头信息
@@ -39,9 +39,10 @@ mitmproxy -p 8888 --follow
 
 既然`mitmproxy`是代理服务器，那么使用代理服务器最常见的方式：在网络偏好设置里面配置代理
 
-macOS设置网络代理
+macOS设置网络代理<br/> 
 ![](/assets/mitmproxy/net-01.png)
-iOS设置网络代理
+
+iOS设置网络代理<br/> 
 ![](/assets/mitmproxy/net-02.png)
 
 这样配置了代理服务器IP端口的电脑以及各种移动设备，就可以被`mitmproxy`轻易抓到网络通信包。这种方式使用起来相对还是有点门槛，使用前必须设置网络代理，如果条件不允许该怎么办？
@@ -55,10 +56,12 @@ iOS设置网络代理
 通过macOS创建WiFi网络很简单，只需要连接到互联网的网线或者一部iPhone手机即可，由于我的笔记本没有网线插槽，下面我就一iPhone为例创建无线网络，与网线创建无线网络大同小异。
 
 #### - 打开"个人热点"开关
+
 ![](/assets/mitmproxy/net-03.png)
 
 #### - 关闭笔记本WiFi，然后通过USB线把手机连接到笔记本
-关闭笔记本WiFi
+
+关闭笔记本WiFi<br/>
 ![](/assets/mitmproxy/net-05.png)
 
 系统偏好设置多出`iPhone USB`网络服务
@@ -66,15 +69,19 @@ iOS设置网络代理
 
 #### - 配置网络共享
 下拉框选择`iPhone USB`，下面勾选`WiFi`选项
+
 ![](/assets/mitmproxy/net-07.png)
 
 确认打开WiFi网络
+
 ![](/assets/mitmproxy/net-08.png)
 
 确认启动网络共享服务
+
 ![](/assets/mitmproxy/net-09.png)
 
 此时`WiFi`网络已经建立成功
+
 ![](/assets/mitmproxy/net-06.png)
 
 ### 2. 把WiFi网络数据包转发到代理服务器
@@ -102,6 +109,7 @@ sudo mitmproxy -p 8888 --follow --transparent
 ```
 
 整体的网络环境是这样
+
 ![](/assets/mitmproxy/network.png)
 
 [详情查看官方文档&raquo;](http://docs.mitmproxy.org/en/stable/transparent/osx.html "http://docs.mitmproxy.org/en/stable/transparent/osx.html")
