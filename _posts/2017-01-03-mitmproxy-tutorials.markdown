@@ -145,3 +145,11 @@ CLIENT_RANDOM 456dee030d0859e58bd83481462e2f00e201c2002ececdb18ada3a525d194ea0 1
 ![](/assets/mitmproxy/net-11.png)
 
 不过暂时`mitmproxy`有个bug：使用`sudo`启动后，无法正常输出`MITMPROXY_SSLKEYLOGFILE`，希望未来版本可以修复这个问题。
+
+
+## mitmproxy安装
+
+```
+brew install python3
+sudo -H pip3 install mitmproxy
+```
