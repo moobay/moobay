@@ -1,5 +1,5 @@
 ---
-title: "mitmproxy使用心得"
+title: "中间人代理服务器MITMPROXY"
 date: 2017-01-03T13:07:45+08:00
 ---
 
@@ -11,7 +11,7 @@ date: 2017-01-03T13:07:45+08:00
 mitmproxy -p 8888 --follow
 ```
 
-通过一行简单的命令搭建好了一台代理服务器，其中`-p 8888`制定了代理主机服务端口，`--follow`是可选参数，可以代理服务器日志实时刷新，运行时界面是这样的
+通过一行简单的命令搭建好了一台代理服务器，其中`-p 8888`指定了代理主机服务端口，`--follow`是可选参数，可以实时刷新代理服务器日志，运行时界面是这样的
 
 ![](/assets/mitmproxy/01.png)
 <!--more-->
@@ -22,7 +22,7 @@ mitmproxy -p 8888 --follow
 `http`包体信息
 ![](/assets/mitmproxy/03.png)
 
-当然了`mitmproxy`的作用并不只是代理服务器，`mitm`代表man-in-the-middle(中间人)，这就暗示了`mitmproxy`角色就是中间人代理，也可以对经过`mitmproxy`的`https`协议发起中间人攻击，使用**[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)**可以破解使用非对称加密的`https`协议内容。简单来说，所有经过`mitmproxy`代理服务器的`https`都可被明文查看，就好像查看`http`协议一样简单，见下图
+当然了`mitmproxy`的作用并不只是代理服务器，`mitm`是"Man In The Middle"(中间人)的意思，事实上`mitmproxy`角色也就是中间人代理，可以对经过`mitmproxy`的`https`协议发起中间人攻击，使用**[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)**可以解码使用非对称加密的`https`协议内容。简单来说，所有经过`mitmproxy`代理服务器的`https`都可被明文查看，就好像查看`http`协议一样简单，见下图
 
 ![](/assets/mitmproxy/04.png)
 
@@ -37,7 +37,7 @@ mitmproxy -p 8888 --follow
 
 ## 配置网络代理
 
-既然`mitmproxy`是代理服务器，那么使用代理服务器最常见的方式：在网络偏好设置里面配置代理
+既然`mitmproxy`是代理服务器，那么使用代理服务器最常见的方式：在网络偏好里面添加网络代理配置
 
 macOS设置网络代理<br/> 
 ![](/assets/mitmproxy/net-01.png)
@@ -112,7 +112,7 @@ sudo mitmproxy -p 8888 --follow --transparent
 
 ![](/assets/mitmproxy/network.png)
 
-[详情查看官方文档&raquo;](http://docs.mitmproxy.org/en/stable/transparent/osx.html "http://docs.mitmproxy.org/en/stable/transparent/osx.html")
+[详情阅读文档&raquo;](http://docs.mitmproxy.org/en/stable/transparent/osx.html "http://docs.mitmproxy.org/en/stable/transparent/osx.html")
 
 ## 配合Wireshark解码https协议
 
@@ -128,9 +128,9 @@ export SSLKEYLOGFILE=/Users/larryhou/Downloads/mitm.log
 export MITMPROXY_SSLKEYLOGFILE=/Users/larryhou/Downloads/mitm.log
 ```
 
-[详情查看官方文档&raquo;](http://docs.mitmproxy.org/en/stable/dev/sslkeylogfile.html "http://docs.mitmproxy.org/en/stable/dev/sslkeylogfile.html")
+[详情阅读文档&raquo;](http://docs.mitmproxy.org/en/stable/dev/sslkeylogfile.html "http://docs.mitmproxy.org/en/stable/dev/sslkeylogfile.html")
 
-`mitmproxy`会自动使用上述环境变量，然后把运行时`https`编解码信息写入环境变量制定的文本文件里面，内容大致如下
+`mitmproxy`会自动使用上述环境变量，然后把运行时`https`协议加密串写入环境变量指定的文件里面，内容大致如下
 
 >CLIENT_RANDOM 586b666139a5361533026c178940c5ba305bbae877a1d2e4ef0cb376ce9bdf05 c70b6ede72b7386e2208a71ff3f951eeb172f9421aaf908ab878e047c7553c2cb02bf7de275f8630a3afb8f4077daedb<br/>
 CLIENT_RANDOM 409dbd42acab433bafb91ed4a7c581ab38de8313632b4328799f196d6b4e2535 4140860c6d4415bbb92f3f769bf6546d18613386714769819979651f2e1cf381da13ba9a3f82afb1da0568db640703be<br/>
@@ -144,3 +144,4 @@ CLIENT_RANDOM 456dee030d0859e58bd83481462e2f00e201c2002ececdb18ada3a525d194ea0 1
 在Wireshark里面查看被解码的[Wikipedia](https://en.wikipedia.org/wiki/Man-in-the-middle_attack "Man-in-the-middle_attack")网站数据
 ![](/assets/mitmproxy/net-11.png)
 
+不过暂时`mitmproxy`有个bug：使用`sudo`启动后，无法正常输出`MITMPROXY_SSLKEYLOGFILE`，希望未来版本可以修复这个问题。
