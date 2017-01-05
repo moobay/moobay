@@ -106,8 +106,10 @@ echo "rdr pass on bridge100 inet proto tcp to port {443,80} -> 127.0.0.1 port 88
 ### 3. 启动mitmproxy代理服务器
 
 ```bash
-sudo mitmproxy -p 8888 --follow --transparent
+sudo -E mitmproxy -p 8888 --follow --transparent
 ```
+
+其中`-E`选项全称`--preserve-env`，用来保留当前环境变量，否则会导致`mitmproxy`无法读取`MITMPROXY_SSLKEYLOGFILE`环境变量，从而文件写入失败。
 
 整体的网络环境是这样
 
@@ -145,7 +147,7 @@ CLIENT_RANDOM 456dee030d0859e58bd83481462e2f00e201c2002ececdb18ada3a525d194ea0 1
 在Wireshark里面查看被解码的[Wikipedia](https://en.wikipedia.org/wiki/Man-in-the-middle_attack "Man-in-the-middle_attack")网站数据
 ![](/assets/mitmproxy/net-11.png)
 
-不过暂时`mitmproxy`有个[bug](https://github.com/mitmproxy/mitmproxy/issues/1913 "bug跟踪连接"): 使用`sudo`启动后，无法正常写入`MITMPROXY_SSLKEYLOGFILE`加密串文件，希望未来版本可以修复这个问题。
+~~不过暂时`mitmproxy`有个[bug](https://github.com/mitmproxy/mitmproxy/issues/1913 "bug跟踪连接"): 使用`sudo`启动后，无法正常写入`MITMPROXY_SSLKEYLOGFILE`加密串文件，希望未来版本可以修复这个问题。~~
 
 
 ## mitmproxy安装
