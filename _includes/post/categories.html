@@ -3,11 +3,11 @@
 <span class="categories">
 	{% if post %}
 		{% for n in post.categories %}
-			· <a href="/blog/categories/#{{ n }}">{{ n }}</a>
+			· <a href="/nav/categories/#{{ n }}">{{ n }}</a>
 		{% endfor %}
 	{% else %}
 		{% for n in page.categories %}
-			· <a href="/blog/categories/#{{ n }}">{{ n }}</a>
+			· <a href="/nav/categories/#{{ n }}">{{ n }}</a>
 		{% endfor %}
 	{% endif %}
 </span>
